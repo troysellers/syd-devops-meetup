@@ -12,7 +12,7 @@ variable aiven_project_name {
 
 variable aiven_cloud { 
 	type = string
-	default = "google-asia-southeast1"
+	default = "google-australia-southeast1"
 	description = "Cloud region for Aiven resources"
 }
 

@@ -129,7 +129,7 @@ For this you will need to use the AVN CLI
     "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
     "tasks.max": "1",
     "key.converter": "org.apache.kafka.connect.json.JsonConverter",
-    "database.server.name": "cloud-expo-service-pg",
+    "database.server.name": "syd-devops-service-pg",
     "database.hostname": "<YOUR PG HOST>",
     "database.port": "<YOUR PG PORT>",
     "database.dbname": "defaultdb",
@@ -188,12 +188,12 @@ You will find the topic name in your Kafka configuration, under the topics tab.
 Firstly, lets make sure we know the name of the topic that has been created in Kafka as a result of the Kafka Connect configuration. We require this so we can tell Clickhouse what topic to read the data from. 
 
 ```console
-$> avn service integration-list cloud-expo-clickhouse
+$> avn service integration-list syd-devops-clickhouse
 SERVICE_INTEGRATION_ID                SOURCE                    DEST                      INTEGRATION_TYPE       ENABLED  ACTIVE  DESCRIPTION                                                                     
 ====================================  ========================  ========================  =====================  =======  ======  ================================================================================
-(integration not enabled)             cloud-expo-clickhouse     cloud-expo-service-kafka  kafka_logs             false    false   Send service logs to Aiven Apache Kafka service or external Apache Kafka cluster
-00b2961a-ae30-47c5-bc58-782ef67e0792  cloud-expo-service-kafka  cloud-expo-clickhouse     clickhouse_kafka       true     true    Access a Kafka cluster from ClickHouse
-(integration not enabled)             cloud-expo-service-pg     cloud-expo-clickhouse     clickhouse_postgresql  false    false   Access a PostgreSQL database from ClickHouse
+(integration not enabled)             syd-devops--clickhouse     syd-devops--service-kafka  kafka_logs             false    false   Send service logs to Aiven Apache Kafka service or external Apache Kafka cluster
+00b2961a-ae30-47c5-bc58-782ef67e0792  syd-devops--service-kafka  syd-devops--clickhouse     clickhouse_kafka       true     true    Access a Kafka cluster from ClickHouse
+(integration not enabled)             syd-devops--service-pg     syd-devops--clickhouse     clickhouse_postgresql  false    false   Access a PostgreSQL database from ClickHouse
 ```
 
 Now we can take that integration id and insert into this command. 
@@ -221,7 +221,7 @@ avn service integration-update <YOUR CLICKHOUSE INTEGRATION ID>  \
                 {"name": "addons" , "type": "String"},
                 {"name": "comments" , "type": "String"}
             ],
-            "topics": [{"name": "cloud-expo-service-pg.public.orders"}],
+            "topics": [{"name": "syd-devops-service-pg.public.orders"}],
             "data_format": "JSONEachRow",
             "group_name": " order_consumer"
         }
@@ -259,7 +259,7 @@ CREATE MATERIALIZED VIEW default.orders_mv TO default.orders AS
 SELECT id, first_name, last_name, email, gender, 
             street, town,  mobile, country, drink_type, 
             toFloat64OrZero(cost) as cost, addons, comments
-FROM `service_cloud-expo-service-kafka`.orders_queue;
+FROM `service_syd-devops-service-kafka`.orders_queue;
 ```
 
 Now, you should be able to determine the most popular drink in Singapore!! 

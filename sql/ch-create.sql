@@ -19,4 +19,4 @@ CREATE MATERIALIZED VIEW default.orders_mv TO default.orders AS
 SELECT id, first_name, last_name, email, gender, 
             street, town,  mobile, country, drink_type, 
             toFloat64OrZero(cost) as cost, addons, comments
-FROM `service_cloud-expo-service-kafka`.orders_queue;
+FROM `service_syd-devops-service-kafka`.orders_queue;

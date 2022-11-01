@@ -1,7 +1,7 @@
 # Create CDC Pipeline with Aiven
 
-In this 45 minute workshop you will create a complete, end to end, CDC pipeline for capturing and analysing data changes in a postgres database.
-Basically, everything here except for the web application is going to be built today.  
+This repository will guide you through the steps on how to create a complete CDC pipeline for capturing and analysing data changes in a postgres database.
+Basically, everything here except for the web application.  
 
 ## Pre-requisites 
 * An [Aiven Account](#create-your-aiven-account) 
@@ -71,7 +71,8 @@ FROM aiven_extras.pg_create_publication_for_all_tables(
 
 ### Adding Data
 
-Now, let's create our data table and load some data.
+Now, let's create our data table and load some data. 
+Our data set is going to simulate a coffee company operating in Singapore. 
 
 ```console
 $> psql <'SERVICE_URI_FROM_CONSOLE'> -f sql/create.sql
@@ -282,7 +283,6 @@ https://user-images.githubusercontent.com/92002375/194501746-d95575d4-acf2-48b1-
 The Aiven platform comes with the capability of spinning up observability pipelines with a few clicks of a button. Follow the video and try it out!
 
 ## View Observability Stack
-
 
 https://user-images.githubusercontent.com/92002375/194501920-89e54eb0-09df-4056-aa90-9e47166ea1eb.mp4
 

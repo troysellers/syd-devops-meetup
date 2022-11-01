@@ -18,7 +18,7 @@ variable aiven_cloud {
 
 variable service_prefix {
 	type = string
-	default = "cloud-expo-"
+	default = "syd-devops-"
 	description = "String prefix for service names" 
 }
 variable aiven_plan {
